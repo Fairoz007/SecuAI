@@ -2,27 +2,38 @@ import { type NextRequest, NextResponse } from "next/server"
 import { createServerClient } from "@supabase/ssr"
 
 export async function middleware(request: NextRequest) {
+  // Skip middleware for API routes and static files
+  if (request.nextUrl.pathname.startsWith('/api/') ||
+      request.nextUrl.pathname.startsWith('/_next/') ||
+      request.nextUrl.pathname.includes('.')) {
+    return NextResponse.next()
+  }
+
   try {
     const supabaseResponse = NextResponse.next({
       request,
     })
 
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return request.cookies.getAll()
-          },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value, options }) => {
-              supabaseResponse.cookies.set(name, value, options)
-            })
-          },
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    if (!url || !key) {
+      console.error('Supabase environment variables not set')
+      return supabaseResponse
+    }
+
+    const supabase = createServerClient(url, key, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            supabaseResponse.cookies.set(name, value, options)
+          })
         },
       },
-    )
+    })
 
     return supabaseResponse
   } catch (error) {
