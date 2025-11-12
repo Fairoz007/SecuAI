@@ -1,15 +1,23 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { AlertCircle } from "lucide-react"
+
+import { createClient } from "@/lib/supabase"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 export default function SignupPage() {
   const [email, setEmail] = useState("")
@@ -17,8 +25,8 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,6 +39,7 @@ export default function SignupPage() {
 
     setLoading(true)
 
+    const supabase = createClient()
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -44,7 +53,7 @@ export default function SignupPage() {
     if (error) {
       setError(error.message)
     } else {
-      router.push("/dashboard")
+      setShowSuccessDialog(true)
     }
     setLoading(false)
   }
@@ -123,6 +132,25 @@ export default function SignupPage() {
           </div>
         </div>
       </div>
+
+      <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <AlertDialogContent className="bg-white text-gray-900">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Verify your email</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-900 dark:text-gray-100">
+              A confirmation link has been sent to your email address. Please check your inbox to complete the sign-up process.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction
+              onClick={() => router.push("/login")}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Go to Login
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </main>
   )
 }

@@ -13,9 +13,9 @@ export default function DashboardPage() {
   const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
+    const supabase = createClient()
     const checkAuth = async () => {
       const {
         data: { session },
@@ -28,9 +28,10 @@ export default function DashboardPage() {
       setLoading(false)
     }
     checkAuth()
-  }, [router, supabase.auth])
+  }, [router])
 
   const handleLogout = async () => {
+    const supabase = createClient()
     await supabase.auth.signOut()
     router.push("/")
   }

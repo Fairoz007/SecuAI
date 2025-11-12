@@ -18,10 +18,10 @@ interface Analysis {
 export default function AnalysisTable() {
   const [analyses, setAnalyses] = useState<Analysis[]>([])
   const [loading, setLoading] = useState(true)
-  const supabase = createClient()
 
   useEffect(() => {
     const fetchAnalyses = async () => {
+      const supabase = createClient()
       const {
         data: { session },
       } = await supabase.auth.getSession()
@@ -41,7 +41,7 @@ export default function AnalysisTable() {
     }
 
     fetchAnalyses()
-  }, [supabase])
+  }, [])
 
   if (loading) {
     return <div className="text-center py-8 text-gray-600">Loading analyses...</div>

@@ -35,7 +35,6 @@ interface LogLine {
 export default function AnalysisTable() {
   const [results, setResults] = useState<AnalysisResult[]>([])
   const [loading, setLoading] = useState(true)
-  const supabase = createClient()
 
   // Generate summary from line analysis when main result is error
   const generateSummaryFromLines = (lines: LogLine[]): AnalysisResult => {
@@ -104,6 +103,7 @@ export default function AnalysisTable() {
 
   useEffect(() => {
     const fetchResults = async () => {
+      const supabase = createClient()
       const {
         data: { session },
       } = await supabase.auth.getSession()
@@ -156,7 +156,7 @@ export default function AnalysisTable() {
     }
 
     fetchResults()
-  }, [supabase])
+  }, [])
 
   const getSeverityIcon = (severity: string) => {
     switch (severity.toLowerCase()) {
@@ -191,6 +191,7 @@ export default function AnalysisTable() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this analysis?")) return
 
+    const supabase = createClient()
     const { error } = await supabase
       .from("analysis_results")
       .delete()

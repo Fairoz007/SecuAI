@@ -58,7 +58,6 @@ export default function ResultsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [expandedLine, setExpandedLine] = useState<string | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   // Generate summary from line analysis when main result is error
   const generateSummaryFromLines = (lines: LogLine[]): AnalysisResult => {
@@ -127,6 +126,7 @@ export default function ResultsPage() {
 
   useEffect(() => {
     const fetchResult = async () => {
+      const supabase = createClient()
       const {
         data: { session },
       } = await supabase.auth.getSession()
@@ -172,7 +172,7 @@ export default function ResultsPage() {
     }
 
     fetchResult()
-  }, [params.id, router, supabase])
+  }, [params.id, router])
 
   useEffect(() => {
     let filtered = [...logLines]

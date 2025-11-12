@@ -10,9 +10,9 @@ import { AlertCircle, Upload, Activity } from "lucide-react"
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
+    const supabase = createClient()
     const checkAuth = async () => {
       const {
         data: { session },
@@ -23,7 +23,7 @@ export default function Home() {
       }
     }
     checkAuth()
-  }, [router, supabase.auth])
+  }, [router])
 
   if (isAuthenticated === null) {
     return null

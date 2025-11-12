@@ -16,9 +16,9 @@ export default function UploadPage() {
   const [error, setError] = useState<string | null>(null)
   const [authLoading, setAuthLoading] = useState(true)
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
+    const supabase = createClient()
     const checkAuth = async () => {
       const {
         data: { session },
@@ -29,7 +29,7 @@ export default function UploadPage() {
       setAuthLoading(false)
     }
     checkAuth()
-  }, [router, supabase.auth])
+  }, [router])
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault()
