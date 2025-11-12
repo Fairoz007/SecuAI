@@ -279,7 +279,7 @@ export default function ResultsPage() {
       </nav>
 
       <div className="max-w-4xl mx-auto px-6 py-8">
-        <Button variant="outline" asChild className="mb-6 bg-transparent">
+        <Button variant="outline" asChild className="mb-6 bg-white border border-gray-200 hover:bg-gray-50 transition-all duration-200">
           <Link href="/dashboard">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Dashboard
@@ -287,7 +287,7 @@ export default function ResultsPage() {
         </Button>
 
         <div className="space-y-6">
-          <div className="bg-white shadow-md rounded-2xl border border-gray-200 p-6">
+          <div className="bg-gray-50 shadow-lg rounded-2xl border border-gray-200 p-6 hover:scale-105 transition-all duration-200">
             <div className="pb-4">
               <div className="flex items-start justify-between">
                 <div className="space-y-3">
@@ -300,14 +300,14 @@ export default function ResultsPage() {
                   </div>
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Analyzed:</span>
+                      <Clock className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-500">Analyzed:</span>
                       <span className="font-medium">{new Date(result.created_at).toLocaleDateString()}</span>
                     </div>
                     {result.confidence && (
                       <div className="flex items-center gap-1">
-                        <Target className="w-4 h-4 text-muted-foreground" />
-                        <span className="text-muted-foreground">Confidence:</span>
+                        <Target className="w-4 h-4 text-gray-500" />
+                        <span className="text-gray-500">Confidence:</span>
                         <span className="font-medium">{result.confidence}%</span>
                       </div>
                     )}
@@ -320,7 +320,7 @@ export default function ResultsPage() {
                       {result.severity.toUpperCase()}
                     </span>
                   </div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-xs text-gray-500">
                     Threat Level
                   </div>
                 </div>
@@ -328,7 +328,7 @@ export default function ResultsPage() {
             </div>
           </div>
 
-          <div className="bg-white shadow-md rounded-2xl border border-gray-200 p-6">
+          <div className="bg-gray-50 shadow-lg rounded-2xl border border-gray-200 p-6 hover:scale-105 transition-all duration-200">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Summary</h3>
             <div className="space-y-4">
               <p className="text-gray-700 leading-relaxed">{result.summary}</p>
@@ -341,7 +341,7 @@ export default function ResultsPage() {
             </div>
           </div>
 
-          <div className="bg-white shadow-md rounded-2xl border border-gray-200 p-6">
+          <div className="bg-gray-50 shadow-lg rounded-2xl border border-gray-200 p-6 hover:scale-105 transition-all duration-200">
             <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <Zap className="w-5 h-5 text-gray-900" />
               Recommended Actions
@@ -446,7 +446,7 @@ export default function ResultsPage() {
 
           {/* Severity Breakdown */}
           {(criticalCount > 0 || highCount > 0 || mediumCount > 0 || lowCount > 0) && (
-            <div className="bg-white shadow-md rounded-2xl border border-gray-200 p-6">
+            <div className="bg-gray-50 shadow-lg rounded-2xl border border-gray-200 p-6 hover:scale-105 transition-all duration-200">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Threat Severity Breakdown</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {criticalCount > 0 && (
@@ -481,7 +481,7 @@ export default function ResultsPage() {
             </div>
           )}
 
-          <div className="bg-white shadow-md rounded-2xl border border-gray-200 p-6">
+          <div className="bg-gray-50 shadow-lg rounded-2xl border border-gray-200 p-6 hover:scale-105 transition-all duration-200">
             <div className="flex justify-between items-center mb-4">
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
@@ -494,7 +494,7 @@ export default function ResultsPage() {
                 </p>
               </div>
               <div className="flex gap-2">
-                <Button onClick={exportToCSV} variant="outline" size="sm" className="flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50">
+                <Button onClick={exportToCSV} variant="outline" size="sm" className="flex items-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 transition-all duration-200">
                   <Download className="w-4 h-4" />
                   Export CSV
                 </Button>

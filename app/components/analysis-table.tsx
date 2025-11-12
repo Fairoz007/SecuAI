@@ -218,7 +218,7 @@ export default function AnalysisTable() {
         <AlertCircle className="w-12 h-12 text-gray-500 mx-auto mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 mb-2">No Analysis Results</h3>
         <p className="text-gray-600 mb-4">You haven't analyzed any logs yet.</p>
-        <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white">
+        <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200">
           <Link href="/upload">Analyze Your First Log</Link>
         </Button>
       </div>
@@ -226,7 +226,7 @@ export default function AnalysisTable() {
   }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-md">
+    <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-lg">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50">
@@ -262,7 +262,7 @@ export default function AnalysisTable() {
                 </td>
                 <td className="py-3 px-4">
                   <div className="flex items-center gap-2">
-                    <Button asChild variant="outline" size="sm">
+                    <Button asChild variant="outline" size="sm" className="transition-all duration-200">
                       <Link href={`/results/${result.id}`}>
                         <Eye className="w-4 h-4 mr-1" />
                         View Details
@@ -272,7 +272,7 @@ export default function AnalysisTable() {
                       variant="outline"
                       size="sm"
                       onClick={() => handleDelete(result.id)}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200"
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>
