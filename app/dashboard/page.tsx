@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { AlertCircle, LogOut, Upload } from "lucide-react"
 import Link from "next/link"
 import AnalysisTable from "@/components/analysis-table"
@@ -48,7 +47,6 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">{user?.email}</span>
-            <ThemeToggle />
             <Button variant="outline" size="sm" onClick={handleLogout} className="bg-white border border-gray-200 hover:bg-gray-50 transition-all duration-200">
               <LogOut className="w-4 h-4 mr-2" />
               Logout

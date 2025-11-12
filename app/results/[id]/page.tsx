@@ -5,7 +5,6 @@ import { useRouter, useParams } from "next/navigation"
 import { createClient } from "@/lib/supabase"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { ArrowLeft, AlertTriangle, AlertCircle, CheckCircle2, Shield, Clock, Target, TrendingUp, Download, ExternalLink, Zap, Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
 
@@ -274,7 +273,6 @@ export default function ResultsPage() {
               SecuAI
             </Link>
           </div>
-          <ThemeToggle />
         </div>
       </nav>
 
